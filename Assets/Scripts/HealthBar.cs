@@ -3,11 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using UnityEngine.UI;
+using TMPro;
+
 public class HealthBar : NetworkBehaviour
 {
 
     public PlayerController _playerScript;
     public Image _healthFillBar;
+    public TextMeshProUGUI MoneyText;
+    public TextMeshProUGUI JailText;
+
+
     
     // Start is called before the first frame update
     private void Awake()
@@ -17,12 +23,24 @@ public class HealthBar : NetworkBehaviour
         PlayerAnnouncer.OnLocalPlayerUpdated+=PlayerUpdated;
     }
 
+
+    //change to update only once every round (when info changes)? performance increase //note watch for new UI additions that constantly change when in play
     private void Update(){
         if(_playerScript == null){
             return;
         }else{
-        _healthFillBar.fillAmount = _playerScript.health;
-        Debug.Log("health amt = "+ _healthFillBar.fillAmount);
+            _healthFillBar.fillAmount = _playerScript.health;
+            //Debug.Log("health amt = "+ _healthFillBar.fillAmount);
+            if(_playerScript.money > 0)
+            {
+                MoneyText.text = "Money: $" + _playerScript.money;
+            }
+            else
+            {
+                MoneyText.text = "Money: -$" + Mathf.Abs(_playerScript.money);
+            }
+            JailText.text = "Jail Time: " + _playerScript.jailTime + " years";
+
         }
     }
 

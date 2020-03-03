@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 3685510362360170602}
   - component: {fileID: 3685510362360170603}
   - component: {fileID: 506953428563530597}
-  - component: {fileID: 2614402376533887991}
   - component: {fileID: 3685510362360170600}
+  - component: {fileID: 7113710533244829743}
   - component: {fileID: 6471875647887609664}
   m_Layer: 0
   m_Name: circle
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 3685510362360170601}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -96,18 +96,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09d972da4217a1a438bf295fb0c57071, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2614402376533887991
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3685510362360170601}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d03deb8a199572498c830b91e415ef8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  health: 0
+  money: 0
+  jailTime: 0
 --- !u!114 &3685510362360170600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,6 +114,20 @@ MonoBehaviour:
   sceneId: 0
   serverOnly: 0
   m_AssetId: 
+--- !u!114 &7113710533244829743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3685510362360170601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f61377b743b33b41a7bc594aa4d8202, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
 --- !u!114 &6471875647887609664
 MonoBehaviour:
   m_ObjectHideFlags: 0
