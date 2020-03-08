@@ -9,7 +9,9 @@ public class PlayerController : MonoBehaviour
 
     public int money;
 
-    public float jailTime;
+    public int jailTime;
+
+    //public int option;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +21,7 @@ public class PlayerController : MonoBehaviour
             0f);
         health = 1f;
         money = Random.Range(-100,100);   //starting game with uneven money = born into rich family / poor etc. unfair but interesting mechanic to think about
-        jailTime = 0f;
+        jailTime = 0;
 
     }
 
@@ -28,4 +30,12 @@ public class PlayerController : MonoBehaviour
     {
         health -= (Time.deltaTime * .01f);
     }
+/*
+
+    public void selectOption(int i){
+        option = i;
+        Debug.Log("chose option " + option + "\t this player has money "+ money);
+    }
+
+*/
 }

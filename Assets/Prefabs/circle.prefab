@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3685510362360170603}
   - component: {fileID: 506953428563530597}
   - component: {fileID: 3685510362360170600}
-  - component: {fileID: 7113710533244829743}
+  - component: {fileID: 6377987343864268571}
   - component: {fileID: 6471875647887609664}
   m_Layer: 0
   m_Name: circle
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 0.6792453, g: 0.34282663, b: 0.34282663, a: 1}
+  m_Color: {r: 0.92941177, g: 0.77254903, b: 0.2, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -99,6 +99,7 @@ MonoBehaviour:
   health: 0
   money: 0
   jailTime: 0
+  option: 0
 --- !u!114 &3685510362360170600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,7 +115,7 @@ MonoBehaviour:
   sceneId: 0
   serverOnly: 0
   m_AssetId: 
---- !u!114 &7113710533244829743
+--- !u!114 &6377987343864268571
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -123,7 +124,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3685510362360170601}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f61377b743b33b41a7bc594aa4d8202, type: 3}
+  m_Script: {fileID: 11500000, guid: 2d03deb8a199572498c830b91e415ef8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   syncMode: 0

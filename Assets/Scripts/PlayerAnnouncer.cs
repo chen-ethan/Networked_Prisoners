@@ -9,6 +9,10 @@ public class PlayerAnnouncer :  NetworkBehaviour
 {
 
     public static event Action<NetworkIdentity> OnLocalPlayerUpdated;
+    private int option;
+
+    private ButtonHandler buttons;
+
 
     public override void OnStartLocalPlayer(){
         base.OnStartLocalPlayer();
@@ -17,6 +21,10 @@ public class PlayerAnnouncer :  NetworkBehaviour
 
 
         StartCoroutine(__RandomizeColor());
+
+        //maybe move to where prompt gets displayed
+        buttons = GetComponent<ButtonHandler>();
+        Debug.Log("buttons found: "+ buttons);
     }
 
 
@@ -48,8 +56,22 @@ public class PlayerAnnouncer :  NetworkBehaviour
         //identity.connectionToServer --> usually null, not if running as lan host
         NetworkIdentity identity = GetComponent<NetworkIdentity>();
         TargetChangeColor(identity.connectionToClient, c);
+        
     }
 
+    [Command]
+    public void CmdConfirmSelection(int i){
+        //option = buttons.option;
+        option = i;
+        Debug.Log("confirming option:" + option);
+        /*
+        NetworkIdentity identity = GetComponent<NetworkIdentity>();
+        if(identity.isServer){
+            Debug.Log("this is server");
+
+        }
+        */
+    }
 
     private void SetColor(Color32 color)
     {
@@ -72,8 +94,6 @@ public class PlayerAnnouncer :  NetworkBehaviour
     {
         SetColor(color);
     }
-
-
 
 
 
