@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using Random = UnityEngine.Random;
+using UnityEngine.UI;
+using TMPro;
 
 public class PlayerAnnouncer :  NetworkBehaviour
 {
@@ -13,14 +15,20 @@ public class PlayerAnnouncer :  NetworkBehaviour
 
     private ButtonHandler buttons;
 
+    public GameObject canvas;
 
     public override void OnStartLocalPlayer(){
         base.OnStartLocalPlayer();
         OnLocalPlayerUpdated?.Invoke(base.netIdentity);
         Debug.Log("announcer: startlocalplayer");
 
+        canvas = GameObject.FindGameObjectWithTag("Canvas");
 
-        StartCoroutine(__RandomizeColor());
+        //StartCoroutine(__RandomizeColor());
+        if(isServer){
+            StartCoroutine(RunServer());
+        }
+
 
         //maybe move to where prompt gets displayed
         buttons = GetComponent<ButtonHandler>();
@@ -34,6 +42,28 @@ public class PlayerAnnouncer :  NetworkBehaviour
     {
         WaitForSeconds wait = new WaitForSeconds(1f);
         while (true){
+            CmdChangeColor();
+            yield return wait;
+        }
+    }
+
+    private IEnumerator RunServer(){
+        WaitForSeconds wait = new WaitForSeconds(1f);
+        //server set up == create a button to say when all players joined.
+        Debug.Log(canvas);
+
+
+        //get references to all players.
+        while(true){
+
+
+            //send out prompt
+
+            //wait for responses
+
+            //once all received --> calculate 
+
+
             CmdChangeColor();
             yield return wait;
         }
