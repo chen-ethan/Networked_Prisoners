@@ -16,6 +16,8 @@ public class PlayerAnnouncer :  NetworkBehaviour
     private ButtonHandler buttons;
 
     public GameObject canvas;
+    private bool gameStarted = false;
+    private int num_players;
 
     public override void OnStartLocalPlayer(){
         base.OnStartLocalPlayer();
@@ -26,7 +28,9 @@ public class PlayerAnnouncer :  NetworkBehaviour
 
         //StartCoroutine(__RandomizeColor());
         if(isServer){
-            StartCoroutine(RunServer());
+            canvas.gameObject.transform.GetChild(2).gameObject.SetActive(true);
+
+            
         }
 
 
@@ -35,7 +39,21 @@ public class PlayerAnnouncer :  NetworkBehaviour
         Debug.Log("buttons found: "+ buttons);
     }
 
+    public void startGame()
+    {
+        canvas.gameObject.transform.GetChild(2).gameObject.SetActive(false);
+        Debug.Log("starte");
+        gameStarted = true;
+        num_players = NetworkServer.connections.Count;
+        StartCoroutine(RunServer());
+    }
 
+    public void activatePrompt()
+    {
+        Debug.Log("act prompt: " + canvas);
+        canvas.transform.GetChild(1).gameObject.SetActive(true);
+
+    }
 
     //DELETE THIS
     private IEnumerator __RandomizeColor()
@@ -51,11 +69,20 @@ public class PlayerAnnouncer :  NetworkBehaviour
         WaitForSeconds wait = new WaitForSeconds(1f);
         //server set up == create a button to say when all players joined.
         Debug.Log(canvas);
-
+        //canvas.gameObject.transform.GetChild(2).gameObject.SetActive(true);
+        //NetworkServer.connections.Keys.Count;
 
         //get references to all players.
-        while(true){
 
+        while(true){
+            for (int i = 0; i < num_players; ++i)
+            {
+                Debug.Log("calling activate: " + i);
+                NetworkServer.connections[0].identity.GetComponent<PlayerAnnouncer>().activatePrompt();
+            }
+            //NetworkServer.connections[0].identity.GetComponent<PlayerAnnouncer>().canvas.transform.GetChild(1).gameObject.SetActive(true);
+            //Debug.Log("#Connections: " + NetworkServer.connections.Count);
+            //NetworkServer.connections[1].identity.GetComponent<PlayerAnnouncer>().canvas.transform.GetChild(1).gameObject.SetActive(true);
 
             //send out prompt
 
@@ -65,6 +92,7 @@ public class PlayerAnnouncer :  NetworkBehaviour
 
 
             CmdChangeColor();
+            Debug.Log("player count: " + NetworkServer.connections.Keys.Count );
             yield return wait;
         }
     }

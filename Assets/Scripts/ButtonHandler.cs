@@ -30,10 +30,17 @@ public class ButtonHandler : NetworkBehaviour
         }
     }
 
+    public void startGame()
+    {
+        if (GetComponent<NetworkIdentity>().isServer)
+        {
+            ClientScene.localPlayer.GetComponent<PlayerAnnouncer>().startGame();
+        }
 
-    
 
 
 
-    
+
+
+    }
 }
