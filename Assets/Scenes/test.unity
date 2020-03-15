@@ -313,6 +313,7 @@ MonoBehaviour:
   _healthFillBar: {fileID: 1959496492}
   MoneyText: {fileID: 1519525639}
   JailText: {fileID: 1711557668}
+  prompt: {fileID: 1344500432}
 --- !u!114 &202278959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -858,7 +859,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &824541812
 RectTransform:
   m_ObjectHideFlags: 0

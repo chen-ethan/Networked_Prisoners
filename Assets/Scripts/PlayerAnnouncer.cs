@@ -19,12 +19,21 @@ public class PlayerAnnouncer :  NetworkBehaviour
     private bool gameStarted = false;
     private int num_players;
 
+
+    private string regPrompt;
+
+    private string jailPrompt;
+
     public override void OnStartLocalPlayer(){
         base.OnStartLocalPlayer();
         OnLocalPlayerUpdated?.Invoke(base.netIdentity);
         Debug.Log("announcer: startlocalplayer");
 
         canvas = GameObject.FindGameObjectWithTag("Canvas");
+        //canvas = ClientScene.
+        if(canvas){
+            CmdChangeColor();
+        }
 
         //StartCoroutine(__RandomizeColor());
         if(isServer){
@@ -48,44 +57,67 @@ public class PlayerAnnouncer :  NetworkBehaviour
         StartCoroutine(RunServer());
     }
 
-    public void activatePrompt()
-    {
-        Debug.Log("act prompt: " + canvas);
-        canvas.transform.GetChild(1).gameObject.SetActive(true);
+    [Command]
+    private void CmdSetHealth(){
+        Debug.Log("calling set health");
+        GetComponent<PlayerController>().health = .25f;
+        RpcSetHealth();
+    }
+
+    [ClientRpc]
+    private void RpcSetHealth(){
+        Debug.Log("calling RPCset health");
+
+        GetComponent<PlayerController>().health = .25f;
 
     }
 
-    //DELETE THIS
-    private IEnumerator __RandomizeColor()
-    {
-        WaitForSeconds wait = new WaitForSeconds(1f);
-        while (true){
-            CmdChangeColor();
-            yield return wait;
+    [TargetRpc]
+    private void TargetSetPrompt(NetworkConnection connection, string regPrompt, string jailPrompt){
+        GetComponent<PlayerController>().promptUp = true;
+    }
+
+    //server code
+    private void calculatePrompt(){
+        int num_free = 0;
+        for (int i = 0; i < num_players; ++i){
+            if(NetworkServer.connections[i].identity.GetComponent<PlayerController>().jailTime <=0 ){
+                num_free++;
+            }
         }
+        int reward = 50000;
+        float prob = 100/num_free;
+
+        int cost = 3000;
+        int jailRed = 2;
+        regPrompt = "rob a bank? prob of succ = #of players who join / " + num_free + " and the reward is $" + reward + "/#of players who join";
+        jailPrompt = "pay " + cost + " to get out of " + jailRed + " years of jail time?";
+
     }
 
     private IEnumerator RunServer(){
         WaitForSeconds wait = new WaitForSeconds(1f);
         //server set up == create a button to say when all players joined.
         Debug.Log(canvas);
-        //canvas.gameObject.transform.GetChild(2).gameObject.SetActive(true);
         //NetworkServer.connections.Keys.Count;
 
         //get references to all players.
 
         while(true){
-            for (int i = 0; i < num_players; ++i)
-            {
-                Debug.Log("calling activate: " + i);
-                NetworkServer.connections[0].identity.GetComponent<PlayerAnnouncer>().activatePrompt();
+            
+
+            int num_free = 0;
+            //calculate prompt
+            for (int i = 0; i < num_players; ++i){
+                if(NetworkServer.connections[i].identity.GetComponent<PlayerController>().jailTime <=0 ){
+                    num_free++;
+                }
             }
-            //NetworkServer.connections[0].identity.GetComponent<PlayerAnnouncer>().canvas.transform.GetChild(1).gameObject.SetActive(true);
-            //Debug.Log("#Connections: " + NetworkServer.connections.Count);
-            //NetworkServer.connections[1].identity.GetComponent<PlayerAnnouncer>().canvas.transform.GetChild(1).gameObject.SetActive(true);
-
             //send out prompt
-
+            for (int i = 0; i < num_players; ++i){
+                //NetworkServer.connections[i].identity.GetComponent<PlayerAnnouncer>().RpcSetHealth();
+                NetworkServer.connections[i].identity.GetComponent<PlayerAnnouncer>().TargetSetPrompt(NetworkServer.connections[i]);
+            }
             //wait for responses
 
             //once all received --> calculate 
@@ -103,20 +135,7 @@ public class PlayerAnnouncer :  NetworkBehaviour
 
     }
 
-    //Updates on Server (Client->server)
-    [Command]
-    private void CmdChangeColor(){
-        Color32 c = Random.ColorHSV();
-        SetColor(c);
-
-        //RpcChangeColor(c);
-
-        //identity.connectionToServer --> usually null, not if running as lan host
-        NetworkIdentity identity = GetComponent<NetworkIdentity>();
-        TargetChangeColor(identity.connectionToClient, c);
-        
-    }
-
+    
     [Command]
     public void CmdConfirmSelection(int i){
         //option = buttons.option;
@@ -130,6 +149,33 @@ public class PlayerAnnouncer :  NetworkBehaviour
         }
         */
     }
+
+
+    //DELETE THIS
+    private IEnumerator __RandomizeColor()
+    {
+        WaitForSeconds wait = new WaitForSeconds(1f);
+        while (true){
+            CmdChangeColor();
+            yield return wait;
+        }
+    }
+
+    //Updates on Server (Client->server)
+    [Command]
+    private void CmdChangeColor(){
+        Color32 c = Random.ColorHSV();
+        SetColor(c);
+
+        RpcChangeColor(c);
+
+        //identity.connectionToServer --> usually null, not if running as lan host
+        //NetworkIdentity identity = GetComponent<NetworkIdentity>();
+        //TargetChangeColor(identity.connectionToClient, c);
+        
+    }
+
+    
 
     private void SetColor(Color32 color)
     {
@@ -152,7 +198,6 @@ public class PlayerAnnouncer :  NetworkBehaviour
     {
         SetColor(color);
     }
-
 
 
 }

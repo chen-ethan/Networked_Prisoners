@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
 
     public int jailTime;
 
+
+    public bool promptUp;
     //public int option;
     // Start is called before the first frame update
     void Start()

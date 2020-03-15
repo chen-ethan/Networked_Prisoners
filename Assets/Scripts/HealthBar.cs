@@ -14,6 +14,8 @@ public class HealthBar : NetworkBehaviour
     public TextMeshProUGUI JailText;
 
 
+    public GameObject prompt;
+
     
     // Start is called before the first frame update
     private void Awake()
@@ -40,7 +42,9 @@ public class HealthBar : NetworkBehaviour
                 MoneyText.text = "Money: -$" + Mathf.Abs(_playerScript.money);
             }
             JailText.text = "Jail Time: " + _playerScript.jailTime + " years";
-
+            if(_playerScript.promptUp){
+                prompt.SetActive(true);
+            }
         }
     }
 
