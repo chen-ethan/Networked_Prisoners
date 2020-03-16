@@ -43,7 +43,22 @@ public class HealthBar : NetworkBehaviour
             }
             JailText.text = "Jail Time: " + _playerScript.jailTime + " years";
             if(_playerScript.promptUp){
+                if (_playerScript.jailTime<=0) {
+                    prompt.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = _playerScript.RegPrompt[0];
+                    prompt.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = _playerScript.RegPrompt[1];
+                    prompt.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>().text = _playerScript.RegPrompt[2];
+                }
+                else
+                {
+                    prompt.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = _playerScript.JailPrompt[0];
+                    prompt.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = _playerScript.JailPrompt[1];
+                    prompt.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>().text = _playerScript.JailPrompt[2];
+                }
                 prompt.SetActive(true);
+            }
+            else
+            {
+                prompt.SetActive(false);
             }
         }
     }

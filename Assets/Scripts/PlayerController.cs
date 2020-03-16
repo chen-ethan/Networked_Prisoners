@@ -13,6 +13,11 @@ public class PlayerController : MonoBehaviour
 
 
     public bool promptUp;
+
+    public string[] RegPrompt = new string[5];
+    public string[] JailPrompt = new string[5];
+
+
     //public int option;
     // Start is called before the first frame update
     void Start()

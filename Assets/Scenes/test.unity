@@ -294,6 +294,10 @@ MonoBehaviour:
   syncInterval: 0.1
   option: 0
   PAscript: {fileID: 0}
+  Yes: {fileID: 205831355}
+  No: {fileID: 587750620}
+  selected: {r: 0.37920302, g: 0.6792453, b: 0.3556426, a: 1}
+  notSelected: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &202278958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -507,7 +511,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -800,7 +804,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -2085,7 +2089,7 @@ RectTransform:
   m_GameObject: {fileID: 1959496489}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 1, z: 3}
+  m_LocalScale: {x: 3, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 824541812}
   m_RootOrder: 0
