@@ -99,7 +99,23 @@ MonoBehaviour:
   health: 0
   money: 0
   jailTime: 0
-  option: 0
+  promptUp: 0
+  RegPrompt:
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  JailPrompt:
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
 --- !u!114 &3685510362360170600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,6 +145,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  canvas: {fileID: 0}
+  text_separators: 8
 --- !u!114 &6471875647887609664
 MonoBehaviour:
   m_ObjectHideFlags: 0

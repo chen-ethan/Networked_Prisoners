@@ -14,8 +14,8 @@ public class PlayerController : MonoBehaviour
 
     public bool promptUp;
 
-    public string[] RegPrompt = new string[5];
-    public string[] JailPrompt = new string[5];
+    public string[] RegPrompt = new string[8]; //0.title | 1.question | 2.maintext | 3 Initial status change| 4.Reward(hp on s, money on succ/ jailtime on s/ ) | 5. Punishment | 6. Collaborative(bool) | prob constant
+    public string[] JailPrompt = new string[8]; //                                   hp, money, jail
 
 
     //public int option;

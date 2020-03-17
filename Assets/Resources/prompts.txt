@@ -1,0 +1,2 @@
+/*0.title | 1.question | 2.maintext | 3 Initial status change (hp,$,jail)| 4.Reward(hp,$,jail on success) | 5. Punishment (hp,$,jail on fail)| 6. Collaborative(bool) | 7.probability constant*/
+Bank Robbery|Will join your peers in a bank robbery?|The reward for successfully pulling off the robbery is $50,000 divided among the number of players that join. The rate of success is the fraction of players who join the robbery that can. If you get caught, you face 2 years of Jail Time.|0,0,0|0,50000,0|0,0,2|1|.9
